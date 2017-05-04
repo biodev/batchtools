@@ -1,0 +1,13 @@
+###Common parameters across all inputs
+Universe=<%= resources$universe %>
+Executable=<%= resources$R.bin.path %>script
+getenv=True
+arguments=--vanilla -e batchtools::doJobCollection(\"<%= uri %>\")
+request_memory=<%= resources$memory %>
+request_cpus=<%= resources$cpus %>
+output=<%= resources$out.dir %>/<%= job.hash %>.out
+error=<%= resources$out.dir %>/<%= job.hash %>.err
+log=<%= log.file %>
+TimeTaken = <%= resources$walltime %>
++MaxExecutionTime = $(TimeTaken) 
+queue 1
