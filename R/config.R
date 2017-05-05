@@ -15,7 +15,14 @@ findConfFile = function() {
 }
 
 setSystemConf = function(reg, conf.file) {
-  reg$cluster.functions = makeClusterFunctionsInteractive()
+  
+  if (Sys.info()[["nodename"]] %in% c("exalab3.ohsu.edu", "morgan2.ohsu.edu")){
+    reg$cluster.functions = makeClusterFunctionsCondor()
+    message("Automatically using Condor cluster function")
+  }else{
+    reg$cluster.functions = makeClusterFunctionsInteractive()
+  }
+  
   reg$default.resources = list()
   reg$temp.dir = tempdir()
 
